@@ -1,0 +1,5 @@
+FROM docker.io/davidcaste/alpine-tomcat
+
+MAINTAINER caozg
+
+RUN apk update &&apk add curl
