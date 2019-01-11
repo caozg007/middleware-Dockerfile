@@ -5,6 +5,8 @@ RUN yum install -y java-1.8.0-openjdk-debuginfo --enablerepo=*debug*
 RUN mkdir -p /usr/local/tomcat
 COPY tomcat /usr/local/tomcat
 
+Tomcat版本：Apache Tomcat Version 8.5.32
+
 功能：在docker容器中通过jstack打印jvm内存堆栈（后续考虑通过alpine精简）
 
 必要配置：docker run增加：—cap-add=SYS_PTRACE
