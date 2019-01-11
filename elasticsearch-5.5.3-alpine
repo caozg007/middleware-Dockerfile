@@ -1,0 +1,22 @@
+FROM 192.168.88.249/library/java:alpine
+WORKDIR /
+COPY entrypoint.sh  entrypoint.sh
+WORKDIR /opt
+MAINTAINER caozhiguang
+COPY  elasticsearch-5.5.3.tar.gz elasticsearch-5.5.3.tar.gz
+RUN tar zxvf elasticsearch-5.5.3.tar.gz && rm -rf elasticsearch-5.5.3.tar.gz
+RUN adduser ybladmin -g ybladmin -D  && chown -R ybladmin:ybladmin .
+RUN echo "network.host: 0.0.0.0" >>elasticsearch-5.5.3/config/elasticsearch.yml
+RUN echo "http.port: 9200" >>elasticsearch-5.5.3/config/elasticsearch.yml
+RUN echo "cluster.name: my-application" >>elasticsearch-5.5.3/config/elasticsearch.yml
+RUN echo "http.cors.enabled: true" >>elasticsearch-5.5.3/config/elasticsearch.yml
+RUN echo "http.cors.allow-origin: \"*\"" >>elasticsearch-5.5.3/config/elasticsearch.yml
+RUN su ybladmin -c "mkdir -p /opt/elasticsearch-5.5.3/logs && touch /opt/elasticsearch-5.5.3/logs/my-application.log"
+RUN mkdir -p /opt/elasticsearch-5.5.3/logs && touch /opt/elasticsearch-5.5.3/logs/my-application.log
+RUN echo "vm.max_map_count=655360" >>/etc/sysctl.conf
+VOLUME ["/opt"]
+EXPOSE 9200
+EXPOSE 9300
+USER root
+ENTRYPOINT ["/bin/sh","/entrypoint.sh"]
+HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail http://127.0.0.1:9200 || exit 1
