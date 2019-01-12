@@ -1,3 +1,6 @@
 FROM 192.168.88.249/library/tomcat:alpine-sunjdk
 COPY local_policy.jar /opt/jdk/jre/lib/security/
 COPY US_export_policy.jar /opt/jdk/jre/lib/security/
+
+
+#含解密jar，图片处理
