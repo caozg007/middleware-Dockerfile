@@ -1,1 +1,5 @@
-docker pull docker.io/frolvlad/alpine-oraclejdk8
+FROM docker.io/frolvlad/alpine-oraclejdk8
+MAINTAINER caozg007
+RUN apk update &&apk add curl
+RUN mkdir -p /usr/local/tomcat
+COPY tomcat /usr/local/tomcat
