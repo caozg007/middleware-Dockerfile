@@ -26,3 +26,7 @@ HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail http://127.0.0.1:9200 || 
 entrypoint.sh:
 su admin -c "sh /opt/elasticsearch-5.5.3/bin/elasticsearch -d"
 tail -f /opt/elasticsearch-5.5.3/logs/my-application.log
+
+
+head插件：
+docker run  -itd  --name es-head -p 9100:9100 -v /etc/localtime:/etc/localtime:ro mobz/elasticsearch-head:5
