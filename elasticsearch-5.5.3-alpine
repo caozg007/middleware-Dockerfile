@@ -29,4 +29,9 @@ tail -f /opt/elasticsearch-5.5.3/logs/my-application.log
 
 
 head插件：
+vim $ES_HOME$/config/elasticsearch.yml
+# 增加如下字段
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
 docker run  -itd  --name es-head -p 9100:9100 -v /etc/localtime:/etc/localtime:ro mobz/elasticsearch-head:5
