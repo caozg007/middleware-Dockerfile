@@ -1,0 +1,9 @@
+FROM 192.168.88.249/library/tomcat:8-alpine
+MAINTAINER caozg007
+ENV DIR_WEBAPP /usr/local/tomcat/webapps/
+ENV JAVA_OPTS -server -Xms500M -Xmx500M -Xss512k -Djava.security.egd=file:/dev/./urandom -Dfile.encoding=UTF8 -Duser.timezone=GMT+08
+RUN  rm -rf $DIR_WEBAPP/*
+COPY entrypoint.sh  entrypoint.sh
+COPY dubbo-admin $DIR_WEBAPP/ROOT
+ENTRYPOINT ["/bin/sh","entrypoint.sh"]
+HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail http://127.0.0.1:8080/ || exit 1
