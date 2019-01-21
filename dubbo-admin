@@ -1,3 +1,4 @@
+```
 FROM 192.168.88.249/library/tomcat:8-alpine
 MAINTAINER caozg007
 ENV DIR_WEBAPP /usr/local/tomcat/webapps/
@@ -6,4 +7,16 @@ RUN  rm -rf $DIR_WEBAPP/*
 COPY entrypoint.sh  entrypoint.sh
 COPY dubbo-admin $DIR_WEBAPP/ROOT
 ENTRYPOINT ["/bin/sh","entrypoint.sh"]
-HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail http://127.0.0.1:8080/ || exit 1
+HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail -u root:root http://127.0.0.1:8080/ || exit 1
+```
+
+```
+sed -i "s/127.0.0.1/$ip/g" $DIR_WEBAPP/ROOT/WEB-INF/dubbo.properties
+catalina.sh run
+```
+
+
+```
+docker run -d  --name dubbo-admin  -p 3305:8080  --restart always -v /etc/localtime:/etc/localtime:ro -v /etc/hosts:/etc/hosts:ro -e ip="192.168.88.248" -h dubbo-admin  192.168.88.249/library/dubbo-admin:alpine
+```
+
