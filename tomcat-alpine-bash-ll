@@ -2,8 +2,6 @@ FROM 192.168.88.249/library/tomcat:8-alpine
 RUN apk add bash
 COPY .bashrc /root/
 
-
-
 .bashrc
 alias ll='ls -alF'
 alias la='ls -A'
