@@ -5,8 +5,7 @@ RUN mkdir -p /usr/local/tomcat
 COPY tomcat /usr/local/tomcat
 
 
-
-
 运行：jstack -F 1 > threaddump_20190108.txt
 报错：Error attaching to process: sun.jvm.hotspot.debugger.DebuggerException: Can't attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 1: Operation not permitted
 
+GITHUB 更新啦！
