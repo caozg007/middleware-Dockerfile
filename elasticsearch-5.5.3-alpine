@@ -35,3 +35,5 @@ http.cors.enabled: true
 http.cors.allow-origin: "*"
 
 docker run  -itd  --name es-head -p 9100:9100 -v /etc/localtime:/etc/localtime:ro mobz/elasticsearch-head:5
+
+启动：docker run -it -d --net host --restart always  -v /etc/localtime:/etc/localtime:ro -v /etc/hosts:/etc/hosts:ro  --name  es 192.168.88.249/library/ybles:5.5.3
