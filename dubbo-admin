@@ -10,7 +10,7 @@ RUN  rm -rf $DIR_WEBAPP/*
 COPY entrypoint.sh  entrypoint.sh
 COPY dubbo-admin $DIR_WEBAPP/ROOT
 ENTRYPOINT ["/bin/sh","entrypoint.sh"]
-HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail -u root:$psw http://127.0.0.1:8080/ || exit 1
+HEALTHCHECK --interval=5s --timeout=15s --retries=3 CMD curl --fail -u root:$psw http://127.0.0.1:8080/ || exit 1
 ```
 
 entrypoint.sh:
